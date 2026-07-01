@@ -81,13 +81,6 @@ As you can see above, the scan result shows that the plugin WN11-CC-000280 has n
 
 I will now begin the removal of the manual remediation and rescan to confirm this, so I can begin the pragmatic remediation.
 
-
-
-
-
-
-
-
 [image]
 
 As you can see above, the manual remediation was successfully removed, and now the scan is showing a failed audit.
@@ -95,9 +88,10 @@ As you can see above, the manual remediation was successfully removed, and now t
 
 ## Pragmatic Remediation
 
-Below is a PowerShell script I plan to run that will enable the prompt for a password upon successful connection through RDP
+Below is a PowerShell script I curated through claude, that I plan to run that will enable the prompt for a password upon successful connection through RDP
 
 ```powershell
+
 # STIG WN11-CC-000280: Remote Desktop Services must always prompt a client for passwords upon connection
 $RegPath = 'HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services'
 $Name    = 'fPromptForPassword'
@@ -120,9 +114,14 @@ if ($Current -eq $Desired) {
 } else {
     Write-Warning "Non-compliant: $Name = $Current, expected $Desired"
 }
+
 ```
+[image]
+
+I have run this in PowerShell ISE and will confirm with a scan to confirm the pragmatic solution was successful.
+
+## Scan results after pragmatic remediation 
 
 [image]
 
-I have run this in PowerShell and will confirm with a scan to confirm the pragmatic solution was successful.
-
+As you can see above, the PowerShell script was successfully executed, resulting in a pass for the audit.
